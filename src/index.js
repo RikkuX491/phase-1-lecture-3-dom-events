@@ -56,6 +56,17 @@ const restaurantMenu = document.getElementById('restaurant-menu')
 for(let index = 0; index < foods.length; index++){
     const image = document.createElement('img')
     image.src = foods[index].image
+    // .addEventListener() - click event
+    image.addEventListener('click', () => {
+        const foodDetailImage = document.querySelector('.detail-image')
+        foodDetailImage.src = foods[index].image
+
+        const foodName = document.querySelector('.name') 
+        foodName.textContent = foods[index].name
+
+        const foodDescription = document.querySelector(`#description-display`)
+        foodDescription.textContent = foods[index].description
+    })
     restaurantMenu.appendChild(image)
 }
 
@@ -67,3 +78,32 @@ foodName.textContent = foods[0].name
 
 const foodDescription = document.querySelector(`#description-display`)
 foodDescription.textContent = foods[0].description
+
+// HTML Form
+const newFoodForm = document.getElementById('new-food')
+// .addEventListener() - submit event
+newFoodForm.addEventListener('submit', (event) => {
+    // .preventDefault()
+    event.preventDefault()
+    const nameElement = document.getElementById('new-name')
+    const imageElement = document.getElementById('new-image')
+    const descriptionElement = document.getElementById('new-description')
+    const food = {
+        name: nameElement.value,
+        image: imageElement.value,
+        description: descriptionElement.value
+    }
+    const image = document.createElement('img')
+    image.src = food.image
+    image.addEventListener('click', () => {
+        const foodDetailImage = document.querySelector('.detail-image')
+        foodDetailImage.src = food.image
+
+        const foodName = document.querySelector('.name') 
+        foodName.textContent = food.name
+
+        const foodDescription = document.querySelector(`#description-display`)
+        foodDescription.textContent = food.description
+    })
+    restaurantMenu.appendChild(image)
+})
