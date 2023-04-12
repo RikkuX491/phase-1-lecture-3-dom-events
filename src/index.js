@@ -53,57 +53,56 @@ const foods = [
 
 const restaurantMenu = document.getElementById('restaurant-menu')
 
-for(let index = 0; index < foods.length; index++){
+function addFoodImageToMenu(food){
     const image = document.createElement('img')
-    image.src = foods[index].image
+    image.src = food.image
+
     // .addEventListener() - click event
     image.addEventListener('click', () => {
-        const foodDetailImage = document.querySelector('.detail-image')
-        foodDetailImage.src = foods[index].image
-
-        const foodName = document.querySelector('.name') 
-        foodName.textContent = foods[index].name
-
-        const foodDescription = document.querySelector(`#description-display`)
-        foodDescription.textContent = foods[index].description
+        displayFoodDetails(food)
     })
     restaurantMenu.appendChild(image)
 }
 
-const foodDetailImage = document.querySelector('.detail-image')
-foodDetailImage.src = foods[0].image
+function displayFoodDetails(food){
+    const foodDetailImage = document.querySelector('.detail-image')
+    foodDetailImage.src = food.image
 
-const foodName = document.querySelector('.name') 
-foodName.textContent = foods[0].name
+    const foodName = document.querySelector('.name') 
+    foodName.textContent = food.name
 
-const foodDescription = document.querySelector(`#description-display`)
-foodDescription.textContent = foods[0].description
+    const foodDescription = document.querySelector(`#description-display`)
+    foodDescription.textContent = food.description
+}
+
+// Here is a for loop which can also be used to loop through the array.
+// I've left the code for the for loop commented out, so you can compare it with the .forEach() array iterator seen on lines 85 - 87.
+
+// for(let index = 0; index < foods.length; index++){
+//     addFoodImageToMenu(foods[index])
+// }
+
+foods.forEach(food => {
+    addFoodImageToMenu(food)
+})
+
+displayFoodDetails(foods[0])
 
 // HTML Form
 const newFoodForm = document.getElementById('new-food')
+
 // .addEventListener() - submit event
 newFoodForm.addEventListener('submit', (event) => {
+
     // .preventDefault()
     event.preventDefault()
-    const nameElement = document.getElementById('new-name')
-    const imageElement = document.getElementById('new-image')
-    const descriptionElement = document.getElementById('new-description')
+    const foodNameValue = document.getElementById('new-name').value
+    const imageLinkValue = document.getElementById('new-image').value
+    const descriptionValue = document.getElementById('new-description').value
     const food = {
-        name: nameElement.value,
-        image: imageElement.value,
-        description: descriptionElement.value
+        name: foodNameValue,
+        image: imageLinkValue,
+        description: descriptionValue
     }
-    const image = document.createElement('img')
-    image.src = food.image
-    image.addEventListener('click', () => {
-        const foodDetailImage = document.querySelector('.detail-image')
-        foodDetailImage.src = food.image
-
-        const foodName = document.querySelector('.name') 
-        foodName.textContent = food.name
-
-        const foodDescription = document.querySelector(`#description-display`)
-        foodDescription.textContent = food.description
-    })
-    restaurantMenu.appendChild(image)
+    addFoodImageToMenu(food)
 })
