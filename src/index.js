@@ -69,5 +69,5 @@ foodDetailImage.src = foods[0].image
 const foodName = document.querySelector('.name') 
 foodName.textContent = foods[0].name
 
-const foodDescriptionDisplay = document.querySelector(`#description-display`)
+const foodDescriptionDisplay = document.querySelector('#description-display')
 foodDescriptionDisplay.textContent = foods[0].description
