@@ -56,6 +56,16 @@ const restaurantMenu = document.getElementById('restaurant-menu')
 function addFoodImageToMenu(food){
     const foodImage = document.createElement('img')
     foodImage.src = food.image
+    foodImage.addEventListener('click', () => {
+        const detailImage = document.querySelector('.detail-image')
+        detailImage.src = food.image
+
+        const nameElement = document.querySelector('.name')
+        nameElement.textContent = food.name
+
+        const descriptionDisplayElement = document.getElementById('description-display')
+        descriptionDisplayElement.textContent = food.description
+    })
     restaurantMenu.appendChild(foodImage)
 }
 
@@ -71,3 +81,22 @@ foodName.textContent = foods[0].name
 
 const foodDescriptionDisplay = document.querySelector('#description-display')
 foodDescriptionDisplay.textContent = foods[0].description
+
+const newFoodForm = document.getElementById('new-food')
+newFoodForm.addEventListener('submit', (event) => {
+    event.preventDefault()
+    
+    const newNameInputElement = document.getElementById('new-name')
+    const newImageInputElement = document.getElementById('new-image')
+    const newDescriptionInputElement = document.getElementById('new-description')
+
+    const newFood = {
+        name: newNameInputElement.value,
+        image: newImageInputElement.value,
+        description: newDescriptionInputElement.value
+    }
+
+    addFoodImageToMenu(newFood)
+
+    newFoodForm.reset()
+})
